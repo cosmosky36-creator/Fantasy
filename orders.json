@@ -1,0 +1,43 @@
+[
+    {
+        "order_id": "MB-MJERQ8",
+        "created_at": "2026-11-09 19:17:11",
+        "nickname": "Steve_Pro",
+        "payment_method": {
+            "key": "qris",
+            "name": "QRIS (Semua E-Wallet & M-Banking)"
+        },
+        "note": "Uji coba order",
+        "items": [
+            {
+                "id": "rank_ksatria",
+                "name": "Rank Ksatria",
+                "category": "rank",
+                "tier": "uncommon",
+                "type": "Rank Server",
+                "icon": "⚔️",
+                "price": 35000,
+                "price_formatted": "Rp 35.000",
+                "qty": 1,
+                "subtotal": 35000,
+                "subtotal_formatted": "Rp 35.000"
+            },
+            {
+                "id": "sin_wrath",
+                "name": "Sin of Wrath",
+                "category": "weapon",
+                "tier": "legendary",
+                "type": "Great Sword",
+                "icon": "🔥",
+                "price": 90000,
+                "price_formatted": "Rp 90.000",
+                "qty": 2,
+                "subtotal": 180000,
+                "subtotal_formatted": "Rp 180.000"
+            }
+        ],
+        "total": 215000,
+        "total_formatted": "Rp 215.000",
+        "status": "menunggu_pembayaran"
+    }
+]

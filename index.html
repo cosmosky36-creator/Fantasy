@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechaboy Store Server - Toko Server Minecraft</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pixelify+Sans:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <div class="server-online-badge">
+                <span class="ping-dot"></span>
+                <span>Server Status: Online (Java & Bedrock Ready)</span>
+            </div>
+            <div>
+                <span>IP Server: <strong style="color:var(--mc-gold);">play.mechaboy.net</strong></span>
+                <span style="margin: 0 8px; opacity: 0.4;">|</span>
+                <a href="#cara-beli" style="color: var(--text-muted); text-decoration: none;">Panduan Beli</a>
+                <span style="margin: 0 8px; opacity: 0.4;">|</span>
+                <a href="admin.php" style="color: var(--text-muted); text-decoration: none;" title="Khusus Pengelola Server">Admin</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR / SITE HEADER -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon">⚔️</div>
+                <div class="brand-text">
+                    <h1>Mechaboy Store Server</h1>
+                    <span>Official Minecraft Store</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#katalog">Katalog Toko</a></li>
+                <li><a href="#cara-beli">Cara Membeli</a></li>
+                <li><a href="#cek-pesanan">Cek Pesanan</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-ip" onclick="copyServerIP('play.mechaboy.net')" title="Salin IP Minecraft Server">
+                    <span>📋 Salin IP</span>
+                </button>
+                <button class="btn-cart" id="btnOpenCart" aria-label="Buka Keranjang Belanja">
+                    <span>🛒 Keranjang</span>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-badge">⚡ Official Server Store ⚡</div>
+            <h2 class="hero-title">Tingkatkan Petualanganmu di <span>Mechaboy</span></h2>
+            <p class="hero-desc">
+                Dapatkan Rank bergengsi, Senjata Legendaris Tujuh Dosa pemusnah monster, dan item eksklusif server dengan transaksi cepat, transparan, dan terpercaya.
+            </p>
+
+            <div class="hero-ip-box">
+                <span style="font-size: 13px; color: var(--text-muted);">IP Server:</span>
+                <span class="ip-text">play.mechaboy.net</span>
+                <button class="btn-ip" onclick="copyServerIP('play.mechaboy.net')">Salin</button>
+            </div>
+        </section>
+
+        <!-- HIGHLIGHTS BANNER -->
+        <div class="features-banner">
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">
+                    <h4>Proses Cepat & Otomatis</h4>
+                    <p>Pesanan langsung tercatat dengan kode unik.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-text">
+                    <h4>100% Aman & Terpercaya</h4>
+                    <p>Pembayaran langsung ke admin resmi server.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💬</div>
+                <div class="feature-text">
+                    <h4>Verifikasi via WhatsApp</h4>
+                    <p>Konfirmasi bukti pembayaran praktis dalam 1 klik.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOOLBAR: FILTER KATEGORI & PENCARIAN (F2, F3) -->
+        <section class="toolbar-section" id="katalog">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">Semua Produk (18)</button>
+                <button class="tab-btn" data-category="rank">👑 Rank (6)</button>
+                <button class="tab-btn" data-category="weapon">⚔️ Senjata Legend (7)</button>
+                <button class="tab-btn" data-category="item">📦 Item Spesial (5)</button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="catalogSearch" placeholder="Cari produk, senjata, atau rank..." aria-label="Cari produk">
+                <span class="search-icon">🔍</span>
+            </div>
+        </section>
+
+        <!-- PRODUCT CATALOG GRID (F1) -->
+        <section class="catalog-section">
+            <div class="product-grid" id="productGrid">
+
+                <!-- 6.1 RANK -->
+                <article class="product-card" data-id="rank_laskar" data-cat="rank" data-name="Rank Laskar" data-type="Rank Server" data-price="15000" data-tier="common" data-icon="🛡️" style="--card-tier-color: #a0a0a0;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-common">Common</span>
+                        <span class="card-cat-label">Rank Server</span>
+                    </div>
+                    <div class="card-icon">🛡️</div>
+                    <h3 class="product-name">Rank Laskar</h3>
+                    <div class="product-type">Rank Server</div>
+                    <p class="product-desc">Rank awal pejuang server. Akses kit Laskar harian, 2 slot /sethome, prefix [Laskar] abu perak, & command /workbench.</p>
+                    <ul class="perks-list">
+                        <li>Prefix [Laskar] eksklusif</li>
+                        <li>2 Set Home (/sethome)</li>
+                        <li>Kit Laskar setiap 24 jam</li>
+                        <li>Akses meja kerja portabel /craft</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 15.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Rank Laskar ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="rank_ksatria" data-cat="rank" data-name="Rank Ksatria" data-type="Rank Server" data-price="35000" data-tier="uncommon" data-icon="⚔️" style="--card-tier-color: #4caf50;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-uncommon">Uncommon</span>
+                        <span class="card-cat-label">Rank Server</span>
+                    </div>
+                    <div class="card-icon">⚔️</div>
+                    <h3 class="product-name">Rank Ksatria</h3>
+                    <div class="product-type">Rank Server</div>
+                    <p class="product-desc">Rank ksatria tangguh. Akses kit Ksatria berzirah besi, 4 slot /sethome, prefix [Ksatria] hijau, serta command /feed saat lapar.</p>
+                    <ul class="perks-list">
+                        <li>Semua perk Rank Laskar</li>
+                        <li>Prefix [Ksatria] hijau terang</li>
+                        <li>4 Set Home (/sethome)</li>
+                        <li>Kit Senjata & Zirah Besi Pilihan</li>
+                        <li>Akses command /feed (pulihkan lapar)</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 35.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Rank Ksatria ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="rank_adipati" data-cat="rank" data-name="Rank Adipati" data-type="Rank Server" data-price="60000" data-tier="rare" data-icon="👑" style="--card-tier-color: #38bdf8;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-rare">Rare</span>
+                        <span class="card-cat-label">Rank Server</span>
+                    </div>
+                    <div class="card-icon">👑</div>
+                    <h3 class="product-name">Rank Adipati</h3>
+                    <div class="product-type">Rank Server</div>
+                    <p class="product-desc">Rank bangsawan terhormat. Akses kit Adipati berzirah berlian, 7 slot /sethome, prefix [Adipati] biru, serta izin terbang (/fly) di area claim sendiri.</p>
+                    <ul class="perks-list">
+                        <li>Semua perk Rank Ksatria</li>
+                        <li>Prefix [Adipati] biru royal</li>
+                        <li>7 Set Home (/sethome)</li>
+                        <li>Terbang bebas (/fly) di dalam claim pribadi</li>
+                        <li>Akses Anvil portabel (/anvil) & /enderchest</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 60.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Rank Adipati ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="rank_mahapati" data-cat="rank" data-name="Rank Mahapati" data-type="Rank Server" data-price="100000" data-tier="epic" data-icon="💎" style="--card-tier-color: #c084fc;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-epic">Epic</span>
+                        <span class="card-cat-label">Rank Server</span>
+                    </div>
+                    <div class="card-icon">💎</div>
+                    <h3 class="product-name">Rank Mahapati</h3>
+                    <div class="product-type">Rank Server</div>
+                    <p class="product-desc">Rank jenderal perang legendaris. Akses kit Mahapati Netherite, 10 slot /sethome, prefix [Mahapati] ungu menyala, /fly global di semua world, dan /heal.</p>
+                    <ul class="perks-list">
+                        <li>Semua perk Rank Adipati</li>
+                        <li>Prefix [Mahapati] ungu epik</li>
+                        <li>10 Set Home (/sethome)</li>
+                        <li>Mode Terbang Global (/fly)</li>
+                        <li>Pemulihan instan /heal & deteksi player /near</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 100.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Rank Mahapati ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="rank_mandala" data-cat="rank" data-name="Rank Mandala" data-type="Rank Server" data-price="150000" data-tier="legendary" data-icon="🌟" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Rank Server</span>
+                    </div>
+                    <div class="card-icon">🌟</div>
+                    <h3 class="product-name">Rank Mandala</h3>
+                    <div class="product-type">Rank Server</div>
+                    <p class="product-desc">Rank penguasa semesta Mechaboy. Membuka semua fasilitas tertinggi server, 15 slot home, prefix [Mandala] emas berkilau, efek glow aura, & kit dewa berkala.</p>
+                    <ul class="perks-list">
+                        <li>Semua perk Rank Mahapati</li>
+                        <li>Prefix [Mandala] emas bercahaya</li>
+                        <li>15 Set Home (/sethome)</li>
+                        <li>Efek Kosmetik Partikel & Glow Aura kustom</li>
+                        <li>Kit Dewa Berkala + Bypass cooldown teleport</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 150.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Rank Mandala ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="rank_mandala_plus" data-cat="rank" data-name="Rank Mandala++" data-type="Rank Server" data-price="250000" data-tier="mythic" data-icon="⚡" style="--card-tier-color: #ef4444;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-mythic">Mythic</span>
+                        <span class="card-cat-label">Rank Server</span>
+                    </div>
+                    <div class="card-icon">⚡</div>
+                    <h3 class="product-name">Rank Mandala++</h3>
+                    <div class="product-type">Rank Server</div>
+                    <p class="product-desc">Puncak kasta tertinggi tak tertandingi di server. Custom tag nama RGB bergerak, unlimited home, prioritas slot join saat server 100% penuh, dan status VIP Discord.</p>
+                    <ul class="perks-list">
+                        <li>Semua fasilitas seluruh tingkatan rank</li>
+                        <li>Prefix [Mandala++] RGB Animasi Pelangi</li>
+                        <li>Unlimited Slot /sethome tanpa batas</li>
+                        <li>Slot Prioritas (Bisa masuk saat server penuh)</li>
+                        <li>Role VIP Khusus di Discord Official Server</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 250.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Rank Mandala++ ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <!-- 6.2 SENJATA LEGEND (TUJUH DOSA) -->
+                <article class="product-card" data-id="sin_wrath" data-cat="weapon" data-name="Sin of Wrath" data-type="Great Sword" data-price="90000" data-tier="legendary" data-icon="🔥" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Great Sword</span>
+                    </div>
+                    <div class="card-icon">🔥</div>
+                    <h3 class="product-name">Sin of Wrath</h3>
+                    <div class="product-type">Great Sword</div>
+                    <p class="product-desc">Pedang raksasa amarah berkobar. Mengeluarkan gelombang tebasan api beruntun (Fire Wrath) dengan knockback dahsyat yang membakar lawan di sekitarnya.</p>
+                    <ul class="perks-list">
+                        <li>Damage Dasar: +18 Attack Damage</li>
+                        <li>Skill Aktif: Fire Wrath Explosion (AOE Fire)</li>
+                        <li>Knockback III & Sharpness VI Built-in</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 90.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Wrath ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="sin_greed" data-cat="weapon" data-name="Sin of Greed" data-type="Scythe" data-price="90000" data-tier="legendary" data-icon="💰" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Scythe</span>
+                    </div>
+                    <div class="card-icon">💰</div>
+                    <h3 class="product-name">Sin of Greed</h3>
+                    <div class="product-type">Scythe</div>
+                    <p class="product-desc">Sabit pemanen jiwa serakah. Setiap mob atau musuh yang ditumbangkan melipatgandakan koin server sebesar 2.5x dan memberikan lifesteal 15%.</p>
+                    <ul class="perks-list">
+                        <li>Damage Dasar: +16 Attack Damage</li>
+                        <li>Pasif: 2.5x Pengganda Koin/EXP Mob</li>
+                        <li>15% Lifesteal memulihkan HP tiap tebasan</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 90.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Greed ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="sin_envy" data-cat="weapon" data-name="Sin of Envy" data-type="Crossbow" data-price="85000" data-tier="legendary" data-icon="🎯" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Crossbow</span>
+                    </div>
+                    <div class="card-icon">🎯</div>
+                    <h3 class="product-name">Sin of Envy</h3>
+                    <div class="product-type">Crossbow</div>
+                    <p class="product-desc">Busur silang dengki beracun. Menembakkan 3 anak panah mistis sekaligus dengan efek Slowing III dan racun mematikan (Fatal Poison).</p>
+                    <ul class="perks-list">
+                        <li>Tembakan Multishot 3x otomatis</li>
+                        <li>Efek Status: Slowness III + Fatal Wither/Poison</li>
+                        <li>Kecepatan reload panah +50%</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 85.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Envy ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="sin_gluttony" data-cat="weapon" data-name="Sin of Gluttony" data-type="Dagger" data-price="80000" data-tier="legendary" data-icon="🥩" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Dagger</span>
+                    </div>
+                    <div class="card-icon">🥩</div>
+                    <h3 class="product-name">Sin of Gluttony</h3>
+                    <div class="product-type">Dagger</div>
+                    <p class="product-desc">Belati lapar darah berkecepatan tinggi. Serangan bertubi-tubi mengisi hunger bar seketika dan mengembalikan darah pengguna secepat kilat.</p>
+                    <ul class="perks-list">
+                        <li>Attack Speed: +2.5 Kecepatan Serang</li>
+                        <li>Pasif: Hunger Bar tidak pernah habis saat bertarung</li>
+                        <li>Regenerasi instan saat menyerang musuh beruntun</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 80.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Gluttony ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="sin_sloth" data-cat="weapon" data-name="Sin of Sloth" data-type="Staff" data-price="85000" data-tier="legendary" data-icon="💤" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Staff</span>
+                    </div>
+                    <div class="card-icon">💤</div>
+                    <h3 class="product-name">Sin of Sloth</h3>
+                    <div class="product-type">Staff</div>
+                    <p class="product-desc">Tongkat sihir kelumpuhan waktu. Mengeluarkan kubah energi gravitasi (Time Freeze) radius 8 blok yang membekukan gerakan monster dan lawan.</p>
+                    <ul class="perks-list">
+                        <li>Skill Aktif: Freeze Field radius 8 blok selama 4 detik</li>
+                        <li>Memberikan debuff Mining Fatigue & Blindness pada target</li>
+                        <li>Meningkatkan Defense pengguna sebesar 25%</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 85.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Sloth ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="sin_lust" data-cat="weapon" data-name="Sin of Lust" data-type="Hammer" data-price="90000" data-tier="legendary" data-icon="💖" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Hammer</span>
+                    </div>
+                    <div class="card-icon">💖</div>
+                    <h3 class="product-name">Sin of Lust</h3>
+                    <div class="product-type">Hammer</div>
+                    <p class="product-desc">Palu pemikat petir kosmis. Hantaman kuat ke tanah menciptakan badai petir berantai (Chain Lightning) yang menyengat musuh dan melumpuhkannya 2 detik.</p>
+                    <ul class="perks-list">
+                        <li>Damage Hantaman: +20 Ground Slam Damage</li>
+                        <li>Skill: Petir Berantai (Chain Lightning ke 5 musuh)</li>
+                        <li>Stun lawan selama 2 detik</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 90.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Lust ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="sin_pride" data-cat="weapon" data-name="Sin of Pride" data-type="Sword" data-price="95000" data-tier="legendary" data-icon="🦁" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Sword</span>
+                    </div>
+                    <div class="card-icon">🦁</div>
+                    <h3 class="product-name">Sin of Pride</h3>
+                    <div class="product-type">Sword</div>
+                    <p class="product-desc">Pedang keagungan raja tak terkalahkan. Menghasilkan True Damage yang berlipat ganda semakin tinggi persentase sisa darah pengguna saat bertarung.</p>
+                    <ul class="perks-list">
+                        <li>Damage Dasar: +22 Attack Damage</li>
+                        <li>Pasif: +40% Bonus True Damage saat HP di atas 80%</li>
+                        <li>Aura Raja: Memberikan efek Weakness pada musuh sekitar</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 95.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Sin of Pride ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <!-- 6.3 ITEM SPESIAL -->
+                <article class="product-card" data-id="item_totem_null" data-cat="item" data-name="Totem of Null" data-type="Item Spesial" data-price="40000" data-tier="rare" data-icon="🧿" style="--card-tier-color: #38bdf8;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-rare">Rare</span>
+                        <span class="card-cat-label">Item Spesial</span>
+                    </div>
+                    <div class="card-icon">🧿</div>
+                    <h3 class="product-name">Totem of Null</h3>
+                    <div class="product-type">Item Spesial</div>
+                    <p class="product-desc">Totem pelindung kehampaan. Jika kamu jatuh ke dalam Void (The End) atau jurang kematian, totem ini pecah dan menteleportasi kamu kembali ke spawn dengan seluruh inventory utuh.</p>
+                    <ul class="perks-list">
+                        <li>Penyelamat kematian jatuh ke Void</li>
+                        <li>Inventory 100% aman terselamatkan</li>
+                        <li>Teleportasi darurat otomatis ke /spawn</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 40.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Totem of Null ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="item_darkness_armor" data-cat="item" data-name="Darkness Armor Set" data-type="Armor Set" data-price="120000" data-tier="epic" data-icon="🖤" style="--card-tier-color: #c084fc;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-epic">Epic</span>
+                        <span class="card-cat-label">Armor Set</span>
+                    </div>
+                    <div class="card-icon">🖤</div>
+                    <h3 class="product-name">Darkness Armor Set</h3>
+                    <div class="product-type">Armor Set</div>
+                    <p class="product-desc">1 Set Komplit Zirah Kegelapan (Helm, Chestplate, Leggings, Boots). Kebal efek racun/debuff, resistensi ledakan 80%, serta Night Vision tanpa batas.</p>
+                    <ul class="perks-list">
+                        <li>1 Set Lengkap Netherite Gelap Bertuah</li>
+                        <li>Resistensi Ledakan (Blast Protection V) 80%</li>
+                        <li>Permanent Night Vision & Kebal Racun Wither</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 120.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Darkness Armor Set ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="item_orbital_cannon" data-cat="item" data-name="Orbital Strike Cannon" data-type="Alat Tempur" data-price="200000" data-tier="mythic" data-icon="🛰️" style="--card-tier-color: #ef4444;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-mythic">Mythic</span>
+                        <span class="card-cat-label">Alat Tempur</span>
+                    </div>
+                    <div class="card-icon">🛰️</div>
+                    <h3 class="product-name">Orbital Strike Cannon</h3>
+                    <div class="product-type">Alat Tempur</div>
+                    <p class="product-desc">Alat pemanggil laser satelit antariksa. Klik kanan untuk membidik koordinat sasaran, pancaran sinar laser raksasa akan jatuh dari langit dengan ledakan spektakuler.</p>
+                    <ul class="perks-list">
+                        <li>Visual Laser Beam Angkasa super megah</li>
+                        <li>Daya hancur masif target (Area of Effect 15 blok)</li>
+                        <li>3x Penggunaan per hari dengan cooldown teratur</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 200.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Orbital Strike Cannon ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="item_phantom_elytra" data-cat="item" data-name="Phantom Elytra" data-type="Sayap Legend" data-price="55000" data-tier="legendary" data-icon="🪽" style="--card-tier-color: #fbbf24;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-legendary">Legendary</span>
+                        <span class="card-cat-label">Sayap Legend</span>
+                    </div>
+                    <div class="card-icon">🪽</div>
+                    <h3 class="product-name">Phantom Elytra</h3>
+                    <div class="product-type">Sayap Legend</div>
+                    <p class="product-desc">Sayap bayangan abadi (Unbreakable) yang tidak akan pernah rusak. Kecepatan meluncur 2x lipat elytra normal dan meninggalkan jejak partikel asap bayangan mistis.</p>
+                    <ul class="perks-list">
+                        <li>Sifat Abadi: Unbreakable (Tidak bisa pecah)</li>
+                        <li>Kecepatan luncur terbang 200%</li>
+                        <li>Efek Partikel Mistis Phantom Smoke Trail</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 55.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Phantom Elytra ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-id="item_crate_key" data-cat="item" data-name="Legend Crate Key x5" data-type="Kunci Gacha" data-price="30000" data-tier="rare" data-icon="🗝️" style="--card-tier-color: #38bdf8;">
+                    <div class="card-top">
+                        <span class="tier-badge tier-rare">Rare</span>
+                        <span class="card-cat-label">Kunci Gacha</span>
+                    </div>
+                    <div class="card-icon">🗝️</div>
+                    <h3 class="product-name">Legend Crate Key x5</h3>
+                    <div class="product-type">Kunci Gacha</div>
+                    <p class="product-desc">Bundel berisi 5 Kunci Crate Legendaris untuk membuka Peti Harta Legenda di Lobby Server. Berpeluang memenangkan Rank Mandala, Senjata Langka, atau Uang Jutaan Ingame.</p>
+                    <ul class="perks-list">
+                        <li>5x Kesempatan Buka Peti Legenda di Spawn</li>
+                        <li>Peluang memenangkan Senjata Dosa & Senjata Boss</li>
+                        <li>100% Dijamin mendapat item tier Rare atau lebih tinggi</li>
+                    </ul>
+                    <div class="card-bottom">
+                        <div class="product-price">Rp 30.000</div>
+                        <button class="btn-add" type="button" aria-label="Tambah Legend Crate Key x5 ke keranjang"><span>+ Tambah</span></button>
+                    </div>
+                </article>
+
+                <!-- Empty State -->
+                <div class="empty-catalog" id="emptyCatalog" style="display: none;">
+                    <div class="emoji">🔍</div>
+                    <h3>Produk Tidak Ditemukan</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Coba gunakan kata kunci lain seperti "rank", "sword", "totem", atau bersihkan pencarian.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CARA MEMBELI (F12) -->
+        <section class="how-to-buy-section" id="cara-beli">
+            <div class="section-header">
+                <div class="section-title">
+                    <span>📖 PANDUAN</span>
+                    <div>Cara Membeli di Mechaboy Store</div>
+                </div>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <h4>Pilih Produk</h4>
+                    <p>Jelajahi pilihan Rank, Senjata Legend 7 Dosa, atau Item Spesial dan klik tombol <strong>"+ Tambah"</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <h4>Isi Nickname & Bayar</h4>
+                    <p>Buka keranjang belanja, masukkan <strong>Nickname Minecraft</strong> kamu dan tentukan metode pembayaran yang diinginkan.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <h4>Buat Pesanan & Chat WA</h4>
+                    <p>Klik tombol buat pesanan untuk mendapatkan <strong>Kode Pesanan Unik</strong>, lalu tekan tombol WhatsApp untuk konfirmasi ke admin.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">04</span>
+                    <h4>Item Masuk Server</h4>
+                    <p>Setelah pembayaran diverifikasi oleh admin, rank atau item kamu langsung diaktifkan di server!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CEK PESANAN SECTION -->
+        <section class="track-section" id="cek-pesanan">
+            <h3 style="font-family: var(--font-pixel); font-size: 20px; color: var(--mc-gold); margin-bottom: 6px;">
+                🔎 Cek Status Pesanan
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px;">
+                Sudah membuat pesanan? Masukkan Kode Pesanan (Contoh: <strong>MB-A1B2C3</strong>) atau Nickname Minecraft kamu untuk melacak statusnya.
+            </p>
+
+            <form class="track-form" id="trackOrderForm">
+                <input type="text" id="trackOrderInput" placeholder="Masukkan Kode Pesanan atau Nickname..." required>
+                <button type="submit" class="btn-ip" style="background: var(--mc-green); color: #000; border-color: #7edc55;">Cari Pesanan</button>
+            </form>
+
+            <div class="track-result" id="trackResultBox"></div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Section 10 & 16) -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Mechaboy Store Server</h3>
+                    <p>Toko Resmi Server Minecraft Mechaboy - Dapatkan Rank, Senjata Legend, & Item Eksklusif</p>
+                    <div style="margin-top: 12px; font-size: 12px;">
+                        <div>🎮 IP: <strong>play.mechaboy.net</strong></div>
+                        <div>📱 WA Admin: <strong>+6281234567890</strong></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 12px; font-size: 14px;">Navigasi Cepat</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                        <li><a href="#katalog" style="color: var(--text-muted); text-decoration: none;">Katalog Toko</a></li>
+                        <li><a href="#cara-beli" style="color: var(--text-muted); text-decoration: none;">Cara Pembelian</a></li>
+                        <li><a href="#cek-pesanan" style="color: var(--text-muted); text-decoration: none;">Status Pesanan</a></li>
+                        <li><a href="admin.php" style="color: var(--mc-gold); text-decoration: none;">🔐 Dashboard Pengelola</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-disclaimer">
+                    <strong style="color: #fff; display: block; margin-bottom: 4px;">Pemberitahuan Hak Cipta & Merek Dagang:</strong>
+                    Toko ini bukan merupakan produk resmi Minecraft ataupun Mojang Studios. Kami tidak berafiliasi dengan, atau didukung oleh Mojang AB atau Microsoft. Seluruh aset Minecraft, merek dagang, dan nama adalah milik Mojang AB / Microsoft.
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 Mechaboy Store Server. Seluruh hak cipta dilindungi undang-undang.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART SLIDE-OUT DRAWER (F4, F5, F6) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-labelledby="cartTitle">
+        <div class="cart-header">
+            <h3 id="cartTitle">🛒 Keranjang Belanja</h3>
+            <button class="btn-close-cart" id="btnCloseCart" aria-label="Tutup Keranjang">✕</button>
+        </div>
+
+        <div class="cart-body">
+            <div class="cart-empty" id="cartEmptyState">
+                <div class="cart-empty-icon">🎒</div>
+                <h4 style="font-family: var(--font-pixel); font-size: 18px; margin-bottom: 6px;">Keranjang Masih Kosong</h4>
+                <p style="font-size: 13px;">Pilih item atau rank dari katalog untuk menambahkannya ke keranjang.</p>
+            </div>
+            <div id="cartItems"></div>
+        </div>
+
+        <div class="cart-footer" id="checkoutArea" style="display: none;">
+            <div class="cart-total-row">
+                <span class="cart-total-label">Total Pembayaran:</span>
+                <span class="cart-total-value" id="cartTotalValue">Rp 0</span>
+            </div>
+
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-group">
+                    <label for="playerNickname">Nickname Minecraft</label>
+                    <div class="form-input-avatar-wrap">
+                        <img src="https://mc-heads.net/avatar/MHF_Steve/32" id="playerAvatarPreview" class="player-avatar-preview" alt="Skin Avatar">
+                        <input type="text" id="playerNickname" name="nickname" placeholder="Contoh: Steve_123" required minlength="3" maxlength="16" autocomplete="off">
+                    </div>
+                    <span style="font-size: 11px; color: var(--text-dim);">Pastikan huruf besar-kecil nickname sesuai di server.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentMethod">Metode Pembayaran</label>
+                    <select id="paymentMethod" name="payment_method" class="form-select" required>
+                        <option value="">-- Pilih Cara Bayar --</option>
+                        <option value="qris">📱 QRIS (Semua E-Wallet & M-Banking)</option>
+                        <option value="dana">💙 DANA</option>
+                        <option value="gopay">🟢 GoPay</option>
+                        <option value="ovo">💜 OVO</option>
+                        <option value="shopeepay">🧡 ShopeePay</option>
+                        <option value="bca">🏦 Bank BCA</option>
+                        <option value="mandiri">💳 Bank Mandiri</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="orderNote">Catatan / Pesan Tambahan (Opsional)</label>
+                    <textarea id="orderNote" class="checkout-note" rows="2" placeholder="Contoh: Tolong kirim ke lobby survival"></textarea>
+                </div>
+
+                <div class="checkout-error" id="checkoutError"></div>
+
+                <button type="submit" class="btn-checkout" id="btnCheckoutSubmit">
+                    Buat Pesanan Sekarang
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- MODAL SUKSES PESANAN (F10) -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎉 Pesanan Berhasil Dibuat!</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Segera lakukan pembayaran untuk mengaktifkan pesananmu.</p>
+            </div>
+            <div class="modal-body">
+                <div class="order-badge-box">
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Kode Pesanan Anda</div>
+                    <div class="order-code-text" id="orderCodeText">MB-000000</div>
+                    <button type="button" class="btn-ip" id="btnCopyOrderCode" style="margin-top: 8px; font-size: 12px; padding: 4px 10px;">📋 Salin Kode</button>
+                </div>
+
+                <div class="order-details-summary" id="orderSummaryBox">
+                    <!-- Ringkasan diisi via JS -->
+                </div>
+
+                <div class="modal-actions">
+                    <a href="#" id="btnWhatsAppConfirm" target="_blank" class="btn-whatsapp-confirm">
+                        <span>💬 Konfirmasi via WhatsApp</span>
+                    </a>
+                    <button type="button" class="btn-secondary-close" id="btnCloseModal">Tutup & Kembali ke Toko</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFIKASI -->
+    <div class="toast-notice" id="toastNotice">Item berhasil ditambahkan!</div>
+
+    <!-- JS Application -->
+    <script src="assets/app.js"></script>
+</body>
+</html>
